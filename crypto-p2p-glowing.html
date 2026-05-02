@@ -4,31 +4,31 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>P2P Flow — USDT › WinPay</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #000000;
-    --surface: #0a0a0a;
-    --surface2: #111111;
-    --border: rgba(255,255,255,0.06);
-    --border2: rgba(255,255,255,0.1);
-    --chrome: #c8c8d4;
+    --bg: #0d0e12;
+    --surface: #15161a;
+    --surface2: #1e1f24;
+    --border: rgba(255,255,255,0.08);
+    --border2: rgba(255,255,255,0.15);
+    --chrome: #e0e0e0;
     --chrome-bright: #ffffff;
-    --chrome-dim: rgba(200,200,212,0.5);
-    --holo-1: #a8d8f0;
-    --holo-2: #e8c4f0;
-    --holo-3: #b8f0d8;
-    --holo-4: #f0e8a8;
+    --chrome-dim: rgba(255,255,255,0.5);
+    --holo-1: rgba(255,255,255,0.05);
+    --holo-2: rgba(255,255,255,0.02);
+    --holo-3: rgba(255,255,255,0.05);
+    --holo-4: rgba(255,255,255,0.02);
     --accent: #ffffff;
-    --amber: #ff6b2b;
+    --amber: #c5a880;
     --text: #e8e8ec;
     --text-muted: rgba(232,232,236,0.45);
     --text-dim: rgba(232,232,236,0.2);
     --mono: 'Space Mono', monospace;
-    --sans: 'Inter', sans-serif;
-    --serif: 'Lora', serif;
-    --glow-chrome: 0 0 30px rgba(200,200,212,0.15), 0 0 60px rgba(200,200,212,0.05);
-    --glow-holo: 0 0 20px rgba(168,216,240,0.2);
+    --sans: 'Inter', system-ui, sans-serif;
+    --serif: 'Cormorant Garamond', serif;
+    --glow-chrome: none;
+    --glow-holo: none;
   }
 
   * { margin:0; padding:0; box-sizing:border-box; }
@@ -47,7 +47,7 @@
     overflow-x: hidden;
   }
 
-  /* Ambient background glow */
+  /* Ambient background — subtle dark fog */
   body::before {
     content: '';
     position: fixed;
@@ -57,28 +57,22 @@
     width: 800px;
     height: 500px;
     background: radial-gradient(ellipse,
-      rgba(168,216,240,0.04) 0%,
-      rgba(232,196,240,0.03) 30%,
-      rgba(184,240,216,0.02) 60%,
+      rgba(255,255,255,0.015) 0%,
+      rgba(255,255,255,0.008) 40%,
       transparent 80%
     );
     pointer-events: none;
     z-index: 0;
   }
 
-  /* Grain overlay */
+  /* Grain overlay removed */
   body::after {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 0;
-    opacity: 0.6;
+    display: none;
   }
 
-  /* Decorative cube — top right */
+  /* Decorative cube — hidden in Dark Elegance theme */
   .deco-cube {
+    display: none;
     position: fixed;
     top: -40px;
     right: -40px;
@@ -99,6 +93,7 @@
 
   /* Decorative butterfly — bottom left */
   .deco-butterfly {
+    display: none;
     position: fixed;
     bottom: -20px;
     left: -30px;
@@ -162,30 +157,14 @@
   }
 
   h1 {
-    font-family: var(--sans);
+    font-family: var(--serif);
     font-size: 34px;
-    font-weight: 700;
-    letter-spacing: 0.06em;
+    font-weight: 600;
+    letter-spacing: 0.04em;
     line-height: 1.15;
-    text-transform: uppercase;
-    background: linear-gradient(135deg,
-      #ffffff 0%,
-      var(--holo-1) 25%,
-      var(--holo-2) 50%,
-      var(--holo-3) 75%,
-      #ffffff 100%
-    );
-    background-size: 200% 200%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: holoShift 6s ease infinite;
+    color: var(--chrome-bright);
   }
 
-  @keyframes holoShift {
-    0%,100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-  }
 
   .subtitle {
     margin-top: 10px;
@@ -213,7 +192,7 @@
 
   .card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 40px rgba(0,0,0,0.5), 0 0 40px rgba(168,216,240,0.06);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.5);
   }
 
   /* Content area stretches to fill — pushes footer down */
@@ -456,11 +435,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg,
-      rgba(168,216,240,0.08) 0%,
-      rgba(232,196,240,0.08) 50%,
-      rgba(184,240,216,0.08) 100%
-    );
+    background: rgba(255,255,255,0.03);
     opacity: 0;
     transition: opacity 0.3s;
   }
@@ -468,7 +443,7 @@
   .btn-calc:hover::before { opacity: 1; }
   .btn-calc:hover {
     border-color: rgba(255,255,255,0.4);
-    box-shadow: 0 0 40px rgba(168,216,240,0.1), 0 0 80px rgba(232,196,240,0.05);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.35);
   }
 
   .btn-calc.shown { opacity:1; transform:translateY(0); }
@@ -502,7 +477,7 @@
   }
 
   .step-card.shown:hover {
-    box-shadow: 0 12px 40px rgba(0,0,0,0.45), 0 0 30px rgba(168,216,240,0.05);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.45);
     transform: scaleY(1) translateY(-3px);
   }
 
@@ -612,9 +587,9 @@
   }
 
   .val-amber {
-    background: rgba(255,107,43,0.1);
-    border-color: rgba(255,107,43,0.25);
-    color: #ff8c5a;
+    background: rgba(197,168,128,0.1);
+    border-color: rgba(197,168,128,0.25);
+    color: #c5a880;
   }
 
   /* Warning */
@@ -622,8 +597,8 @@
     display: flex;
     align-items: flex-start;
     gap: 10px;
-    background: rgba(255,107,43,0.06);
-    border: 1px solid rgba(255,107,43,0.15);
+    background: rgba(197,168,128,0.06);
+    border: 1px solid rgba(197,168,128,0.2);
     border-radius: 12px;
     padding: 12px 14px;
     margin-top: 14px;
@@ -633,7 +608,7 @@
 
   .warn-text {
     font-size: 14px;
-    color: rgba(255,140,90,0.85);
+    color: rgba(197,168,128,0.9);
     line-height: 1.7;
     font-family: var(--serif);
   }
@@ -706,8 +681,8 @@
     display: flex;
     align-items: flex-start;
     gap: 12px;
-    background: rgba(168,216,240,0.04);
-    border: 1px dashed rgba(168,216,240,0.2);
+    background: rgba(255,255,255,0.03);
+    border: 1px dashed rgba(255,255,255,0.12);
     border-radius: 12px;
     padding: 13px 15px;
     margin-top: 14px;
@@ -719,7 +694,7 @@
     font-family: var(--sans);
     font-size: 10px;
     font-weight: 600;
-    color: rgba(168,216,240,0.9);
+    color: rgba(255,255,255,0.7);
     letter-spacing: 0.12em;
     text-transform: uppercase;
     margin-bottom: 4px;
@@ -754,7 +729,6 @@
     border-color: rgba(255,255,255,0.18);
     color: #ffffff;
     background: rgba(255,255,255,0.05);
-    box-shadow: 0 0 20px rgba(255,255,255,0.04);
   }
 
   .btn-gotit:active { transform: scale(0.98); }
@@ -788,7 +762,7 @@
   }
 
   .final-card.shown:hover {
-    box-shadow: 0 12px 40px rgba(0,0,0,0.5), 0 0 40px rgba(168,216,240,0.08);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.5);
     transform: translateY(-4px);
   }
 
@@ -810,17 +784,10 @@
     top: -50%; left: -50%;
     width: 200%; height: 200%;
     background: radial-gradient(ellipse at center,
-      rgba(168,216,240,0.04) 0%,
-      rgba(232,196,240,0.03) 40%,
+      rgba(255,255,255,0.02) 0%,
       transparent 70%
     );
-    animation: finalGlow 4s ease infinite;
     pointer-events: none;
-  }
-
-  @keyframes finalGlow {
-    0%,100% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.1); opacity: 0.7; }
   }
 
   .final-card.shown { opacity:1; transform:translateY(0); }
@@ -828,21 +795,15 @@
   .final-icon {
     font-size: 32px;
     margin-bottom: 14px;
-    filter: drop-shadow(0 0 20px rgba(255,255,255,0.3));
   }
 
   .final-title {
-    font-family: var(--sans);
+    font-family: var(--serif);
     font-size: 18px;
-    font-weight: 700;
+    font-weight: 600;
     color: #ffffff;
     margin-bottom: 8px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    background: linear-gradient(135deg, #ffffff, var(--holo-1), var(--holo-2));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    letter-spacing: 0.04em;
   }
 
   .final-sub {
@@ -882,42 +843,24 @@
   ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 3px; }
 
-  /* ── ROTATING GLOW WRAPPER ── */
+  /* ── CARD WRAPPER ── */
   .glass-card-wrapper {
     position: relative;
     border-radius: 20px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    padding: 2px;
+    padding: 1px;
     margin-bottom: 12px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    background: rgba(255,255,255,0.08);
   }
 
   .glass-card-wrapper::before {
-    content: '';
-    position: absolute;
-    width: 150%;
-    height: 150%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) rotate(0deg);
-    background: conic-gradient(
-      transparent,
-      transparent,
-      transparent,
-      rgba(255, 255, 255, 0.85)
-    );
-    animation: rotate-glow 4s linear infinite;
-    z-index: 0;
+    display: none;
   }
 
-  @keyframes rotate-glow {
-    from { transform: translate(-50%, -50%) rotate(0deg); }
-    to   { transform: translate(-50%, -50%) rotate(360deg); }
-  }
-
-  /* Cards inside wrapper: sit on top of the glow layer */
+  /* Cards inside wrapper: sit on top */
   .glass-card-wrapper > .card,
   .glass-card-wrapper > .step-card,
   .glass-card-wrapper > .final-card {
@@ -926,24 +869,18 @@
     flex: 1;
     position: relative;
     z-index: 1;
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.5),
-      inset 0 -1px 0 rgba(255, 255, 255, 0.1),
-      inset 0 0 2px 1px rgba(255, 255, 255, 0.1) !important;
+    box-shadow: none !important;
   }
 
-  /* Hover glow on wrapper */
+  /* Hover on wrapper */
   .glass-card-wrapper:hover {
-    box-shadow: 0 12px 48px rgba(0,0,0,0.55), 0 0 40px rgba(168,216,240,0.08);
+    box-shadow: 0 12px 48px rgba(0,0,0,0.55);
   }
 
   /* Suppress step-card's own hover transform when inside wrapper */
   .glass-card-wrapper > .step-card.shown:hover {
     transform: scaleY(1) translateY(0) !important;
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.5),
-      inset 0 -1px 0 rgba(255, 255, 255, 0.1),
-      inset 0 0 2px 1px rgba(255, 255, 255, 0.1) !important;
+    box-shadow: none !important;
   }
 
   .glass-card-wrapper > .final-card.shown:hover {
@@ -989,7 +926,6 @@
     color: #ffffff;
     margin-top: 14px;
     letter-spacing: -0.02em;
-    text-shadow: 0 0 30px rgba(255,255,255,0.3);
   }
 
   .amount-hero-unit {
@@ -1026,9 +962,9 @@
   }
 
   .amount-copy-btn.copied {
-    color: #b8f0d8;
-    border-color: rgba(184,240,216,0.35);
-    background: rgba(184,240,216,0.07);
+    color: rgba(255,255,255,0.8);
+    border-color: rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.06);
   }
 
   /* Wallet address input inside step card */
@@ -1096,9 +1032,9 @@
   }
 
   .wallet-paste-btn.copied {
-    color: #b8f0d8;
-    border-color: rgba(184,240,216,0.3);
-    background: rgba(184,240,216,0.06);
+    color: rgba(255,255,255,0.8);
+    border-color: rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.05);
   }
 </style>
 </head>
@@ -1303,7 +1239,7 @@
           <div class="ss-icon">📸</div>
           <div class="ss-text">
             <div class="ss-title">Screenshot this screen in WinPay</div>
-            <div class="ss-sub">The QR code + <span style="color:#a8d8f0;font-family:var(--mono)">${vals.topUpINR.toLocaleString()} RP</span> must be clearly visible. Keep it for records.</div>
+            <div class="ss-sub">The QR code + <span style="color:var(--chrome-dim);font-family:var(--mono)">${vals.topUpINR.toLocaleString()} RP</span> must be clearly visible. Keep it for records.</div>
           </div>
         </div>
       `
